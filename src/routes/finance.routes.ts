@@ -1,0 +1,37 @@
+import { Router } from 'express';
+import { parseISO } from 'date-fns';
+
+import FinancesRepository from '../repositories/FinancesRepository';
+import CreateFinanceService from '../services/CreateFinanceService';
+
+const financeRouter = Router();
+const financesRepository = new FinancesRepository();
+
+financeRouter.get('/', (request, response) => {
+  const finances = financesRepository.all();
+
+  return response.json(finances);
+});
+
+financeRouter.post('/', (request, response) => {
+  try {
+    const { type, description, value, date } = request.body;
+
+    const parsedDate = parseISO(date);
+
+    const createFinance = new CreateFinanceService(financesRepository);
+
+    const finance = createFinance.execute({
+      type,
+      description,
+      value,
+      date: parsedDate,
+    });
+
+    return response.json(finance);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
+export default financeRouter;

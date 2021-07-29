@@ -1,9 +1,8 @@
-import { Router } from "express";
+import { Router } from 'express';
+import financeRouter from './finance.routes';
 
 const routes = Router();
 
-routes.get("/", (request, response) =>
-  response.json({ message: "Hello world" })
-);
+routes.use('/finance', financeRouter);
 
 export default routes;
