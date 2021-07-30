@@ -1,23 +1,21 @@
-import { v4 as uuid } from 'uuid';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('finances')
 class Finance {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   type: string;
 
+  @Column()
   description: string;
 
-  value: string;
+  @Column({ type: 'decimal', precision: 15, scale: 2, default: 0.0 })
+  value: number;
 
+  @Column('timestamp with time zone')
   date: Date;
-
-  constructor({ type, description, value, date }: Omit<Finance, 'id'>) {
-    this.id = uuid();
-    this.type = type;
-    this.description = description;
-    this.date = date;
-    this.value = value;
-  }
 }
 
 export default Finance;

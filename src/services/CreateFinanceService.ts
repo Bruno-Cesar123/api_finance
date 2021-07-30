@@ -1,27 +1,32 @@
+import { getCustomRepository } from 'typeorm';
+
 import Finance from '../models/Finance';
 import FinancesRepository from '../repositories/FinancesRepository';
 
 interface Request {
   type: string;
   description: string;
-  value: string;
+  value: number;
   date: Date;
 }
 
 class CreateFinanceService {
-  private financesRepository: FinancesRepository;
+  public async execute({
+    type,
+    description,
+    value,
+    date,
+  }: Request): Promise<Finance> {
+    const financesRepository = getCustomRepository(FinancesRepository);
 
-  constructor(financesRepository: FinancesRepository) {
-    this.financesRepository = financesRepository;
-  }
-
-  public execute({ type, description, value, date }: Request): Finance {
-    const finance = this.financesRepository.create({
+    const finance = financesRepository.create({
       type,
       description,
       value,
       date,
     });
+
+    await financesRepository.save(finance);
 
     return finance;
   }

@@ -1,27 +1,28 @@
 import { Router } from 'express';
+import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 
 import FinancesRepository from '../repositories/FinancesRepository';
 import CreateFinanceService from '../services/CreateFinanceService';
 
 const financeRouter = Router();
-const financesRepository = new FinancesRepository();
 
-financeRouter.get('/', (request, response) => {
-  const finances = financesRepository.all();
+financeRouter.get('/', async (request, response) => {
+  const financesRepository = getCustomRepository(FinancesRepository);
+  const finances = await financesRepository.find();
 
   return response.json(finances);
 });
 
-financeRouter.post('/', (request, response) => {
+financeRouter.post('/', async (request, response) => {
   try {
     const { type, description, value, date } = request.body;
 
     const parsedDate = parseISO(date);
 
-    const createFinance = new CreateFinanceService(financesRepository);
+    const createFinance = new CreateFinanceService();
 
-    const finance = createFinance.execute({
+    const finance = await createFinance.execute({
       type,
       description,
       value,
