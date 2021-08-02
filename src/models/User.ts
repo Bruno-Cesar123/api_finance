@@ -6,22 +6,19 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('finances')
-class Finance {
+@Entity('users')
+class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  type: string;
+  name: string;
 
   @Column()
-  description: string;
+  email: string;
 
-  @Column({ type: 'decimal', precision: 15, scale: 2, default: 0.0 })
-  value: number;
-
-  @Column('timestamp with time zone')
-  date: Date;
+  @Column()
+  password: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -30,4 +27,4 @@ class Finance {
   updated_at: Date;
 }
 
-export default Finance;
+export default User;
