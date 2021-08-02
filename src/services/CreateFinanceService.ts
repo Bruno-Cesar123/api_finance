@@ -6,6 +6,7 @@ import FinancesRepository from '../repositories/FinancesRepository';
 interface Request {
   type: string;
   description: string;
+  user_id: string;
   value: number;
   date: Date;
 }
@@ -14,6 +15,7 @@ class CreateFinanceService {
   public async execute({
     type,
     description,
+    user_id,
     value,
     date,
   }: Request): Promise<Finance> {
@@ -22,6 +24,7 @@ class CreateFinanceService {
     const finance = financesRepository.create({
       type,
       description,
+      user_id,
       value,
       date,
     });

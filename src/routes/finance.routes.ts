@@ -16,7 +16,7 @@ financeRouter.get('/', async (request, response) => {
 
 financeRouter.post('/', async (request, response) => {
   try {
-    const { type, description, value, date } = request.body;
+    const { type, description, user_id, value, date } = request.body;
 
     const parsedDate = parseISO(date);
 
@@ -26,6 +26,7 @@ financeRouter.post('/', async (request, response) => {
       type,
       description,
       value,
+      user_id,
       date: parsedDate,
     });
 
