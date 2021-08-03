@@ -5,7 +5,11 @@ import { parseISO } from 'date-fns';
 import FinancesRepository from '../repositories/FinancesRepository';
 import CreateFinanceService from '../services/CreateFinanceService';
 
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 const financeRouter = Router();
+
+financeRouter.use(ensureAuthenticated);
 
 financeRouter.get('/', async (request, response) => {
   const financesRepository = getCustomRepository(FinancesRepository);
