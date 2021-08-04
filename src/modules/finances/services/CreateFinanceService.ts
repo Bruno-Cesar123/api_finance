@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 
-import Finance from '../models/Finance';
+import Finance from '../infra/typeorm/entities/Finance';
 import FinancesRepository from '../repositories/FinancesRepository';
 
 interface Request {

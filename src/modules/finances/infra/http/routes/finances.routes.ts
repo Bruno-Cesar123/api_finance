@@ -2,10 +2,10 @@ import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 
-import FinancesRepository from '../repositories/FinancesRepository';
-import CreateFinanceService from '../services/CreateFinanceService';
+import FinancesRepository from '@modules/finances/repositories/FinancesRepository';
+import CreateFinanceService from '@modules/finances/services/CreateFinanceService';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 const financeRouter = Router();
 
