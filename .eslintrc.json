@@ -20,6 +20,9 @@
   "rules": {
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "argsIgnorePattern": "_"
+    }],
     "camelcase": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "import/extensions": [

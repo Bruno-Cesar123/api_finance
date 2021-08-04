@@ -19,25 +19,21 @@ financeRouter.get('/', async (request, response) => {
 });
 
 financeRouter.post('/', async (request, response) => {
-  try {
-    const { type, description, user_id, value, date } = request.body;
+  const { type, description, user_id, value, date } = request.body;
 
-    const parsedDate = parseISO(date);
+  const parsedDate = parseISO(date);
 
-    const createFinance = new CreateFinanceService();
+  const createFinance = new CreateFinanceService();
 
-    const finance = await createFinance.execute({
-      type,
-      description,
-      value,
-      user_id,
-      date: parsedDate,
-    });
+  const finance = await createFinance.execute({
+    type,
+    description,
+    value,
+    user_id,
+    date: parsedDate,
+  });
 
-    return response.json(finance);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(finance);
 });
 
 export default financeRouter;
