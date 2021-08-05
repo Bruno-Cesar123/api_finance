@@ -1,9 +1,9 @@
-import { getCustomRepository } from 'typeorm';
-
+import { inject, injectable } from 'tsyringe';
 import Finance from '../infra/typeorm/entities/Finance';
-import FinancesRepository from '../repositories/FinancesRepository';
 
-interface Request {
+import IFinancesRepository from '../repositories/IFinancesRepository';
+
+interface IRequest {
   type: string;
   description: string;
   user_id: string;
@@ -11,25 +11,27 @@ interface Request {
   date: Date;
 }
 
+@injectable()
 class CreateFinanceService {
+  constructor(
+    @inject('FinancesRepository')
+    private financesRepository: IFinancesRepository,
+  ) {}
+
   public async execute({
     type,
     description,
     user_id,
     value,
     date,
-  }: Request): Promise<Finance> {
-    const financesRepository = getCustomRepository(FinancesRepository);
-
-    const finance = financesRepository.create({
+  }: IRequest): Promise<Finance> {
+    const finance = await this.financesRepository.create({
       type,
       description,
       user_id,
       value,
       date,
     });
-
-    await financesRepository.save(finance);
 
     return finance;
   }
