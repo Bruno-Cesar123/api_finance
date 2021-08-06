@@ -1,12 +1,10 @@
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-import { container } from 'tsyringe';
-
-import CreateFinanceService from '@modules/finances/services/CreateFinanceService';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
+import FinancesController from '../controllers/FinancesController';
 
 const financeRouter = Router();
+const financesController = new FinancesController();
 
 financeRouter.use(ensureAuthenticated);
 
@@ -16,22 +14,6 @@ financeRouter.use(ensureAuthenticated);
 //   return response.json(finances);
 // });
 
-financeRouter.post('/', async (request, response) => {
-  const { type, description, user_id, value, date } = request.body;
-
-  const parsedDate = parseISO(date);
-
-  const createFinance = container.resolve(CreateFinanceService);
-
-  const finance = await createFinance.execute({
-    type,
-    description,
-    value,
-    user_id,
-    date: parsedDate,
-  });
-
-  return response.json(finance);
-});
+financeRouter.post('/', financesController.create);
 
 export default financeRouter;

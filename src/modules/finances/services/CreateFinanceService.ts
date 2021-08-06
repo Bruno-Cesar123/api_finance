@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import Finance from '../infra/typeorm/entities/Finance';
 
