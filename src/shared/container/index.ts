@@ -9,8 +9,8 @@ import FinancesRepository from '@modules/finances/infra/typeorm/repositories/Fin
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
-// import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
-// import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
 container.registerSingleton<IFinancesRepository>(
   'FinancesRepository',
@@ -20,4 +20,9 @@ container.registerSingleton<IFinancesRepository>(
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
+);
+
+container.registerSingleton<IUserTokensRepository>(
+  'UserTokensRepository',
+  UserTokensRepository,
 );
