@@ -8,9 +8,10 @@ export default class UserAvatarController {
     const updateUserAvatar = container.resolve(UpdateUserAvatarService);
     const user = await updateUserAvatar.execute({
       user_id: request.user.id,
-      avatarFilename: request.file.filename,
+      avatarFilename: request.file?.filename,
     });
 
+    // @ts-expect-error
     delete user.password;
 
     return response.json(user);

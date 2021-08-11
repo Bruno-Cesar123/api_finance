@@ -72,4 +72,26 @@ describe('UpdateUserAvatar', () => {
     expect(deleteFile).toHaveBeenCalledWith('avatar.jpg');
     expect(user.avatar).toBe('avatar2.jpg');
   });
+
+  it('should not be able file to upload', async () => {
+    const fakeUsersRepository = new FakeUsersRepository();
+    const fakeStorageProvider = new FakeStorageProvider();
+    const updateUserAvatar = new UpdateUserAvatarService(
+      fakeUsersRepository,
+      fakeStorageProvider,
+    );
+
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    });
+
+    await expect(
+      updateUserAvatar.execute({
+        user_id: user.id,
+        avatarFilename: undefined,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

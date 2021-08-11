@@ -10,7 +10,7 @@ import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   user_id: string;
-  avatarFilename: string;
+  avatarFilename?: string;
 }
 
 @injectable()
@@ -34,9 +34,13 @@ class UpdateUserAvatarService {
       await this.storageProvider.deleteFile(user.avatar);
     }
 
-    const fileName = await this.storageProvider.saveFile(avatarFilename);
+    if (!avatarFilename) {
+      throw new AppError('No files to upload.');
+    }
 
-    user.avatar = fileName;
+    const filename = await this.storageProvider.saveFile(avatarFilename);
+
+    user.avatar = filename;
 
     await this.usersRepository.save(user);
 

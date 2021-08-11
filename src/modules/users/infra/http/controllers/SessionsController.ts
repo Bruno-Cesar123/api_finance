@@ -14,6 +14,7 @@ export default class SessionsController {
       password,
     });
 
+    // @ts-expect-error
     delete user.password;
 
     return response.json({ user, token });
