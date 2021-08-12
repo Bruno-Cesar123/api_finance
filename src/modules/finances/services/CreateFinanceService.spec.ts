@@ -1,11 +1,16 @@
 import CreateFinanceService from './CreateFinanceService';
 import FakeFinancesRepository from '../repositories/fakes/FakeFinancesRepository';
 
-describe('CreateFinance', () => {
-  it('should be able to create a new finance', async () => {
-    const fakeFinancesRepository = new FakeFinancesRepository();
-    const createFinance = new CreateFinanceService(fakeFinancesRepository);
+let fakeFinancesRepository: FakeFinancesRepository;
+let createFinance: CreateFinanceService;
 
+describe('CreateFinance', () => {
+  beforeEach(() => {
+    fakeFinancesRepository = new FakeFinancesRepository();
+    createFinance = new CreateFinanceService(fakeFinancesRepository);
+  });
+
+  it('should be able to create a new finance', async () => {
     const finance = await createFinance.execute({
       type: 'spend',
       description: 'water bill',
