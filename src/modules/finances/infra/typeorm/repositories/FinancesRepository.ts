@@ -31,6 +31,14 @@ class FinancesRepository implements IFinancesRepository {
 
     return finance;
   }
+
+  public async findFinances(user_id: string): Promise<Finance[]> {
+    const finances = await this.ormRepository.find({
+      where: { user_id },
+    });
+
+    return finances;
+  }
 }
 
 export default FinancesRepository;

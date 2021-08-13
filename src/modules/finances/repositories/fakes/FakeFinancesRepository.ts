@@ -8,6 +8,13 @@ import Finance from '../../infra/typeorm/entities/Finance';
 class FakeFinancesRepository implements IFinancesRepository {
   private finances: Finance[] = [];
 
+  public async findFinances(user_id: string): Promise<Finance[]> {
+    const finances = this.finances.filter(
+      finance => finance.user_id === user_id,
+    );
+    return finances;
+  }
+
   public async create({
     type,
     description,
