@@ -24,4 +24,24 @@ financeRouter.post(
 );
 financeRouter.get('/', financesController.index);
 
+financeRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  financesController.show,
+);
+
+financeRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  financesController.delete,
+);
+
 export default financeRouter;

@@ -12,6 +12,12 @@ class FinancesRepository implements IFinancesRepository {
     this.ormRepository = getRepository(Finance);
   }
 
+  public async findFinanceId(id: string): Promise<Finance | undefined> {
+    const finance = await this.ormRepository.findOne(id);
+
+    return finance;
+  }
+
   public async create({
     type,
     description,
@@ -38,6 +44,10 @@ class FinancesRepository implements IFinancesRepository {
     });
 
     return finances;
+  }
+
+  public async deleteFinance(finance: Finance): Promise<void> {
+    await this.ormRepository.remove(finance);
   }
 }
 
