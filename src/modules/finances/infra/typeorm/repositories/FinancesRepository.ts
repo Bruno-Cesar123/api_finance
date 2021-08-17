@@ -57,6 +57,14 @@ class FinancesRepository implements IFinancesRepository {
 
     return sumTotal;
   }
+
+  public async sumTotalSpend(user_id: string): Promise<number> {
+    const sumTotal = await this.ormRepository.query(`
+      SELECT SUM(finances.value) FROM finances WHERE finances.type = 'gasto' AND finances.user_id = '${user_id}' ;
+    `);
+
+    return sumTotal;
+  }
 }
 
 export default FinancesRepository;

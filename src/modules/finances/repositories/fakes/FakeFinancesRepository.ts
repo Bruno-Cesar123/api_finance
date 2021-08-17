@@ -58,9 +58,24 @@ class FakeFinancesRepository implements IFinancesRepository {
       finance => finance.user_id === user_id,
     );
 
-    const teste = finances.some(finance => finance.type);
+    const total = finances.some(finance => finance.type);
 
-    return Number(teste);
+    return Number(total);
+  }
+
+  public async sumTotalSpend(user_id: string): Promise<number> {
+    // const finances = this.finances
+    //   .filter(finance => finance.user_id === user_id)
+    //   .map(fin => fin.type)
+    //   .reduce((total, preco) => total + preco);
+
+    const finances = this.finances.filter(
+      finance => finance.user_id === user_id,
+    );
+
+    const total = finances.some(finance => finance.type);
+
+    return Number(total);
   }
 }
 

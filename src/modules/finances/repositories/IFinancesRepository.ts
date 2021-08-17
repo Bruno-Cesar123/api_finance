@@ -8,4 +8,5 @@ export default interface IFinancesRepository {
   findFinanceId(id: string): Promise<Finance | undefined>;
   deleteFinance(finance: Finance): Promise<void>;
   sumTotalEntrance(user_id: string): Promise<number>;
+  sumTotalSpend(user_id: string): Promise<number>;
 }
