@@ -47,6 +47,21 @@ class FakeFinancesRepository implements IFinancesRepository {
     const financeId = this.finances.indexOf(finance);
     this.finances.splice(financeId);
   }
+
+  public async sumTotalEntrance(user_id: string): Promise<number> {
+    // const finances = this.finances
+    //   .filter(finance => finance.user_id === user_id)
+    //   .map(fin => fin.type)
+    //   .reduce((total, preco) => total + preco);
+
+    const finances = this.finances.filter(
+      finance => finance.user_id === user_id,
+    );
+
+    const teste = finances.some(finance => finance.type);
+
+    return Number(teste);
+  }
 }
 
 export default FakeFinancesRepository;

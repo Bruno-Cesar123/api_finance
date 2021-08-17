@@ -49,6 +49,14 @@ class FinancesRepository implements IFinancesRepository {
   public async deleteFinance(finance: Finance): Promise<void> {
     await this.ormRepository.remove(finance);
   }
+
+  public async sumTotalEntrance(user_id: string): Promise<number> {
+    const sumTotal = await this.ormRepository.query(`
+      SELECT SUM(finances.value) FROM finances WHERE finances.type = 'entrada' AND finances.user_id = '${user_id}' ;
+    `);
+
+    return sumTotal;
+  }
 }
 
 export default FinancesRepository;

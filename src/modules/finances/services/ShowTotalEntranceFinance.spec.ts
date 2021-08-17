@@ -1,13 +1,15 @@
-import ListFinancesService from './ListFinancesService';
+import ShowTotalEntranceFinanceService from './ShowTotalEntranceFinanceService';
 import FakeFinancesRepository from '../repositories/fakes/FakeFinancesRepository';
 
 let fakeFinancesRepository: FakeFinancesRepository;
-let listFinances: ListFinancesService;
+let showTotalEntranceFinance: ShowTotalEntranceFinanceService;
 
-describe('ListFinances', () => {
+describe('showTotalEntranceFinance', () => {
   beforeEach(() => {
     fakeFinancesRepository = new FakeFinancesRepository();
-    listFinances = new ListFinancesService(fakeFinancesRepository);
+    showTotalEntranceFinance = new ShowTotalEntranceFinanceService(
+      fakeFinancesRepository,
+    );
   });
 
   it('should be able to create a new finance', async () => {
@@ -15,14 +17,14 @@ describe('ListFinances', () => {
       type: 'spend',
       description: 'water bill',
       user_id: '123123',
-      value: 32.9,
+      value: 100,
       date: new Date(),
     });
 
-    const ShowFinances = await listFinances.execute({
+    const countFinanceType = await showTotalEntranceFinance.execute({
       user_id: finance.user_id,
     });
 
-    expect(ShowFinances).toStrictEqual([finance]);
+    expect(countFinanceType).toBe(1);
   });
 });

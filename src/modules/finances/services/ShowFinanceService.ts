@@ -1,5 +1,6 @@
-import AppError from '@shared/errors/AppError';
 import 'reflect-metadata';
+import AppError from '@shared/errors/AppError';
+
 import { injectable, inject } from 'tsyringe';
 import Finance from '../infra/typeorm/entities/Finance';
 
