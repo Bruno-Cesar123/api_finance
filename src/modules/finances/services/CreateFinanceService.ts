@@ -1,5 +1,8 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
+
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+
 import Finance from '../infra/typeorm/entities/Finance';
 
 import IFinancesRepository from '../repositories/IFinancesRepository';
@@ -17,6 +20,9 @@ class CreateFinanceService {
   constructor(
     @inject('FinancesRepository')
     private financesRepository: IFinancesRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -33,6 +39,8 @@ class CreateFinanceService {
       value,
       date,
     });
+
+    await this.cacheProvider.invalidatePrefix('finances-list');
 
     return finance;
   }

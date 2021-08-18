@@ -1,13 +1,19 @@
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import ListFinancesService from './ListFinancesService';
 import FakeFinancesRepository from '../repositories/fakes/FakeFinancesRepository';
 
 let fakeFinancesRepository: FakeFinancesRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let listFinances: ListFinancesService;
 
 describe('ListFinances', () => {
   beforeEach(() => {
     fakeFinancesRepository = new FakeFinancesRepository();
-    listFinances = new ListFinancesService(fakeFinancesRepository);
+    fakeCacheProvider = new FakeCacheProvider();
+    listFinances = new ListFinancesService(
+      fakeFinancesRepository,
+      fakeCacheProvider,
+    );
   });
 
   it('should be able to create a new finance', async () => {
