@@ -49,11 +49,6 @@ class FakeFinancesRepository implements IFinancesRepository {
   }
 
   public async sumTotalEntrance(user_id: string): Promise<number> {
-    // const finances = this.finances
-    //   .filter(finance => finance.user_id === user_id)
-    //   .map(fin => fin.type)
-    //   .reduce((total, preco) => total + preco);
-
     const finances = this.finances.filter(
       finance => finance.user_id === user_id,
     );
@@ -64,11 +59,6 @@ class FakeFinancesRepository implements IFinancesRepository {
   }
 
   public async sumTotalSpend(user_id: string): Promise<number> {
-    // const finances = this.finances
-    //   .filter(finance => finance.user_id === user_id)
-    //   .map(fin => fin.type)
-    //   .reduce((total, preco) => total + preco);
-
     const finances = this.finances.filter(
       finance => finance.user_id === user_id,
     );
@@ -76,6 +66,20 @@ class FakeFinancesRepository implements IFinancesRepository {
     const total = finances.some(finance => finance.type);
 
     return Number(total);
+  }
+
+  public async listIntervalEntrance(user_id: string): Promise<Finance[]> {
+    const listEntrance = this.finances.filter(
+      finance => finance.user_id === user_id,
+    );
+    return listEntrance;
+  }
+
+  public async listIntervalSpend(user_id: string): Promise<Finance[]> {
+    const listEntrance = this.finances.filter(
+      finance => finance.user_id === user_id,
+    );
+    return listEntrance;
   }
 }
 

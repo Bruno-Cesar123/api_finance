@@ -52,18 +52,42 @@ class FinancesRepository implements IFinancesRepository {
 
   public async sumTotalEntrance(user_id: string): Promise<number> {
     const sumTotal = await this.ormRepository.query(`
-      SELECT SUM(finances.value) FROM finances WHERE finances.type = 'entrada' AND finances.user_id = '${user_id}' ;
+      SELECT SUM(finances.value) AS total FROM finances WHERE finances.type = 'entrada' AND finances.user_id = '${user_id}' ;
     `);
 
-    return sumTotal;
+    return sumTotal[0].total;
   }
 
   public async sumTotalSpend(user_id: string): Promise<number> {
     const sumTotal = await this.ormRepository.query(`
-      SELECT SUM(finances.value) FROM finances WHERE finances.type = 'gasto' AND finances.user_id = '${user_id}' ;
+      SELECT SUM(finances.value) AS total FROM finances WHERE finances.type = 'gasto' AND finances.user_id = '${user_id}' ;
     `);
 
-    return sumTotal;
+    return sumTotal[0].total;
+  }
+
+  public async listIntervalEntrance(user_id: string): Promise<Finance[]> {
+    const listIntervalEntrance = await this.ormRepository.query(`
+      SELECT SUM(finances.value) as total, DATE_TRUNC('day', created_at) AS date_interval
+      FROM finances WHERE finances.type = 'entrada'
+      AND finances.user_id = '${user_id}'
+      AND finances.created_at > current_date - interval '10' day
+      GROUP BY date_interval
+    `);
+
+    return listIntervalEntrance;
+  }
+
+  public async listIntervalSpend(user_id: string): Promise<Finance[]> {
+    const listIntervalEntrance = await this.ormRepository.query(`
+      SELECT SUM(finances.value) as total, DATE_TRUNC('day', created_at) AS date_interval
+      FROM finances WHERE finances.type = 'gasto'
+      AND finances.user_id = '${user_id}'
+      AND finances.created_at > current_date - interval '10' day
+      GROUP BY date_interval
+    `);
+
+    return listIntervalEntrance;
   }
 }
 

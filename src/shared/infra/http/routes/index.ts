@@ -13,6 +13,6 @@ routes.use('/users', usersRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
-routes.use('/finance/total', financeTotalRouter);
+routes.use('/finance/list', financeTotalRouter);
 
 export default routes;

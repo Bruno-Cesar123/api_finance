@@ -24,6 +24,7 @@ export default class CreateFinances1627667754047 implements MigrationInterface {
           {
             name: 'value',
             type: 'decimal(15,2)',
+            default: 0.0,
           },
           {
             name: 'date',

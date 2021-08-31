@@ -9,4 +9,6 @@ export default interface IFinancesRepository {
   deleteFinance(finance: Finance): Promise<void>;
   sumTotalEntrance(user_id: string): Promise<number>;
   sumTotalSpend(user_id: string): Promise<number>;
+  listIntervalEntrance(user_id: string): Promise<Finance[]>;
+  listIntervalSpend(user_id: string): Promise<Finance[]>;
 }

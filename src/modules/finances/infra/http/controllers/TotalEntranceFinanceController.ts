@@ -11,9 +11,7 @@ export default class TotalEntranceFinanceController {
       ShowTotalEntranceFinanceService,
     );
 
-    const totalFinance = await totalFinanceEntrance.execute({
-      user_id,
-    });
+    const totalFinance = await totalFinanceEntrance.execute({ user_id });
 
     return response.json(totalFinance);
   }
