@@ -17,7 +17,7 @@ financeTotalRouter.use(ensureAuthenticated);
 
 financeTotalRouter.get('/entrance', totalEntranceFinanceController.index);
 financeTotalRouter.get('/spend', totalSpendFinanceController.index);
-financeTotalRouter.get('/interval/entrance', listIntervalEntrance.index);
-financeTotalRouter.get('/interval/spend', listIntervalSpend.index);
+financeTotalRouter.get('/entrance', listIntervalEntrance.index);
+financeTotalRouter.get('/spend', listIntervalSpend.index);
 
 export default financeTotalRouter;
