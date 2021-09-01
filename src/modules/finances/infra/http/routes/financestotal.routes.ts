@@ -15,8 +15,8 @@ const listIntervalSpend = new ListIntervalSpendController();
 
 financeTotalRouter.use(ensureAuthenticated);
 
-financeTotalRouter.get('/entrance', totalEntranceFinanceController.index);
-financeTotalRouter.get('/spend', totalSpendFinanceController.index);
+financeTotalRouter.get('/total/entrance', totalEntranceFinanceController.index);
+financeTotalRouter.get('/total/spend', totalSpendFinanceController.index);
 financeTotalRouter.get('/entrance', listIntervalEntrance.index);
 financeTotalRouter.get('/spend', listIntervalSpend.index);
 
