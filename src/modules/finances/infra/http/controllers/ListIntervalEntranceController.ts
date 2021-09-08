@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 
 import ListIntervalEntranceService from '@modules/finances/services/ListIntervalEntranceService';
 
-export default class ListIntervalController {
+export default class ListIntervalEntranceController {
   public async index(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
 

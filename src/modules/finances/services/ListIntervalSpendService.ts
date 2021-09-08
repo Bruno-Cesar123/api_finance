@@ -17,7 +17,7 @@ class ListIntervalSpendService {
 
   public async execute({ user_id }: IRequest): Promise<Finance[]> {
     const listIntervalEntrance =
-      await this.financesRepository.listIntervalEntrance(user_id);
+      await this.financesRepository.listIntervalSpend(user_id);
 
     return listIntervalEntrance;
   }

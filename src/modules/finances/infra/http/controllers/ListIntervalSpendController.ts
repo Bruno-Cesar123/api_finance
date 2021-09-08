@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 
 import ListIntervalSpendService from '@modules/finances/services/ListIntervalSpendService';
 
-export default class TotalSpendFinanceController {
+export default class ListSpendFinanceController {
   public async index(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
 
